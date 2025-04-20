@@ -7,20 +7,19 @@ def get_tracks(artist_name, api_key):
         "artist": artist_name,
         "api_key": api_key,
         "format": "json",
-        "limit": 10  # количество треков
+        "limit": 10  
     }
 
     response = requests.get(url, params=params)
     data = response.json()
 
     if "toptracks" in data:
-        print(f"Топ треки для исполнителя '{artist_name}':\n")
+        print(f"Top tracks '{artist_name}':\n")
         for i, track in enumerate(data["toptracks"]["track"], start=1):
             print(f"{i}. {track['name']}")
     else:
-        print("Произошла ошибка:", data.get("message", "неизвестная ошибка"))
+        print("error:", data.get("message", "error))
 
-# Введи сюда свой API-ключ от Last.fm
 API_KEY = "57dd3ce68cb9d939d64a71da86627321"
-artist = input("Введи имя исполнителя: ")
+artist = input("Singer name: ")
 get_tracks(artist, API_KEY)
